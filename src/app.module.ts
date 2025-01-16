@@ -2,6 +2,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RolesModule } from './roles/roles.module';
+import { UsersModule } from './users/users.module';
+import { DocTypeModule } from './doc-type/doc-type.module';
+import { StatesModule } from './states/states.module';
+import { SuppliesModule } from './supplies/supplies.module';
 
 @Module({
   imports: [
@@ -16,7 +20,11 @@ import { RolesModule } from './roles/roles.module';
       entities: [],
       synchronize: true
     }),
-    RolesModule
+    RolesModule,
+    UsersModule,
+    DocTypeModule,
+    StatesModule,
+    SuppliesModule
   ],
   controllers: [],
   providers: []
