@@ -1,6 +1,7 @@
 import { User } from "src/users/entities/user.entity";
-import { Column, OneToMany } from "typeorm";
+import { Column, Entity, OneToMany } from "typeorm";
 
+@Entity()
 export class DocType {
 
   @Column({ primary: true, generated: true })

@@ -17,17 +17,16 @@ import { SuppliesModule } from './supplies/supplies.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [],
-      synchronize: true
+      autoLoadEntities: true,
+      synchronize: true,
     }),
     RolesModule,
     UsersModule,
     DocTypeModule,
     StatesModule,
-    SuppliesModule
+    SuppliesModule,
   ],
   controllers: [],
-  providers: []
+  providers: [],
 })
-
-export class AppModule { }
+export class AppModule {}

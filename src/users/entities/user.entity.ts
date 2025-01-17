@@ -1,8 +1,9 @@
 import { DocType } from "src/doc-type/entities/doc-type.entity";
 import { Role } from "src/roles/entities/role.entity";
 import { State } from "src/states/entities/state.entity";
-import { Column, CreateDateColumn, ManyToOne, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, UpdateDateColumn } from "typeorm";
 
+@Entity()
 export class User {
 
   @Column({ primary: true, generated: true })
@@ -38,10 +39,10 @@ export class User {
   @Column({ length: 1000 })
   password: string;
 
-  @CreateDateColumn({ type: 'timestamptz' })
+  @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'timestamptz' })
+  @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 
 }
