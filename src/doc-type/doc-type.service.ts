@@ -1,26 +1,26 @@
-import { Injectable } from '@nestjs/common';
-import { CreateDocTypeDto } from './dto/create-doc-type.dto';
-import { UpdateDocTypeDto } from './dto/update-doc-type.dto';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { DocType } from './entities/doc-type.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class DocTypeService {
-  create(createDocTypeDto: CreateDocTypeDto) {
-    return 'This action adds a new docType';
+  constructor(
+    @InjectRepository(DocType)
+    private readonly docTypesRepository: Repository<DocType>,
+  ) {}
+
+  async findAll() {
+    return await this.docTypesRepository.find();
   }
 
-  findAll() {
-    return `This action returns all docType`;
-  }
+  async findOne(id: number) {
+    const docType: DocType = await this.docTypesRepository.findOneBy({ id });
 
-  findOne(id: number) {
-    return `This action returns a #${id} docType`;
-  }
+    if (!docType) {
+      throw new BadRequestException('DocType not found.');
+    }
 
-  update(id: number, updateDocTypeDto: UpdateDocTypeDto) {
-    return `This action updates a #${id} docType`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} docType`;
+    return docType;
   }
 }

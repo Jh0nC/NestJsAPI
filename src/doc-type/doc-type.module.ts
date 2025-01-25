@@ -9,4 +9,4 @@ import { DocType } from './entities/doc-type.entity';
   controllers: [DocTypeController],
   providers: [DocTypeService],
 })
-export class DocTypeModule { }
+export class DocTypeModule {}
