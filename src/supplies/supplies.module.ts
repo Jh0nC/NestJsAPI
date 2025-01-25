@@ -7,11 +7,14 @@ import { SuppliesService } from './supplies.service';
 import { SuppliesController } from './supplies.controller';
 import { BoughtDetail } from 'src/boughts/entities/bought-detail.entity';
 import { BoughtsModule } from 'src/boughts/boughts.module';
+import { ProductDetail } from 'src/products/entities/product-detail.entity';
+import { ProductsModule } from 'src/products/products.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Supply, State, BoughtDetail]),
+    TypeOrmModule.forFeature([Supply, State, BoughtDetail, ProductDetail]),
     StatesModule,
+    forwardRef(() => ProductsModule),
     forwardRef(() => BoughtsModule),
   ],
   controllers: [SuppliesController],

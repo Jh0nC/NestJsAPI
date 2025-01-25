@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { State } from 'src/states/entities/state.entity';
 import { BoughtDetail } from 'src/boughts/entities/bought-detail.entity';
 import { plainToInstance } from 'class-transformer';
+import { ProductDetail } from 'src/products/entities/product-detail.entity';
 
 @Injectable()
 export class SuppliesService {
@@ -19,6 +20,9 @@ export class SuppliesService {
 
     @InjectRepository(BoughtDetail)
     private readonly boughtDetailsRepository: Repository<BoughtDetail>,
+
+    @InjectRepository(ProductDetail)
+    private readonly productDetailsRepository: Repository<ProductDetail>,
   ) {}
 
   async create(createSupplyDto: CreateSupplyDto) {
@@ -134,13 +138,19 @@ export class SuppliesService {
   }
 
   private async checkSupplyAssociations(supply: Supply): Promise<boolean> {
-    const BoughtDetail = await this.boughtDetailsRepository.findOneBy({
-      supply,
-    });
-    if (BoughtDetail) {
+    if (
+      await this.boughtDetailsRepository.findOneBy({
+        supply,
+      })
+    ) {
       return true;
-    } else {
-      /* validate if product details has any associated */
+    }
+    if (
+      await this.productDetailsRepository.findOneBy({
+        supply,
+      })
+    ) {
+      return true;
     }
 
     return false;
